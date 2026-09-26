@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>GuruDigitalLab.id — Platform Berbagi Konten & Aplikasi Guru</title>
+  
+  <!-- Meta SEO & Pratinjau Media Sosial (OpenGraph / WhatsApp Card) -->
+  <meta name="description" content="Platform digital kurasi modul ajar Kurikulum Merdeka, bank prompt AI edukatif, serta showcase aplikasi praktis Google Apps Script karya Hengki Guslau.">
+  <meta name="author" content="Hengki Guslau">
+  <meta name="theme-color" content="#0B0813">
+
+  <!-- Open Graph / WhatsApp Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GuruDigitalLab.id — Pusat Inovasi Modul, AI Prompt & Aplikasi Guru">
+  <meta property="og:description" content="Koleksi terkurasi modul ajar, generator prompt AI edukatif, dan aplikasi Google Apps Script gratis untuk pendidik Indonesia.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
+
+  <!-- Favicon SVG Robot Brand -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230B132B' stroke='%232563EB' stroke-width='4'/%3E%3Crect x='23' y='22' width='54' height='46' rx='20' fill='%23FFFFFF'/%3E%3Crect x='30' y='30' width='40' height='28' rx='12' fill='%230F172A'/%3E%3Cpath d='M36 43C37.5 39 42.5 39 44 43' stroke='%2306B6D4' stroke-width='3.5' stroke-linecap='round'/%3E%3Cpath d='M56 43C57.5 39 62.5 39 64 43' stroke='%2306B6D4' stroke-width='3.5' stroke-linecap='round'/%3E%3Cpath d='M46 51C48 53.5 52 53.5 54 51' stroke='%2306B6D4' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background-color: #0B0813;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Iframe Responsif Layar Penuh */
+    #gas-frame {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      border: none;
+      outline: none;
+      z-index: 10;
+      background-color: #0B0813;
+    }
+
+    /* Layar Splash Loading Animasi Halus */
+    #splash-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, #1E1438 0%, #0B0813 85%);
+      color: #F8FAFC;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s ease;
+    }
+
+    #splash-loader.loaded {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      max-width: 90%;
+    }
+
+    .logo-container {
+      width: 76px;
+      height: 76px;
+      border-radius: 1.5rem;
+      background: #120D24;
+      border: 2px solid rgba(192, 132, 252, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 35px rgba(168, 85, 247, 0.3);
+      animation: pulseGlow 2.2s infinite ease-in-out;
+      margin-bottom: 1.25rem;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 25px rgba(168, 85, 247, 0.25);
+      }
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 45px rgba(168, 85, 247, 0.5);
+      }
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: #FFFFFF;
+      margin-bottom: 0.35rem;
+    }
+
+    .brand-title span {
+      color: #C084FC;
+    }
+
+    .brand-subtitle {
+      font-size: 0.85rem;
+      color: #94A3B8;
+      margin-bottom: 1.75rem;
+    }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(192, 132, 252, 0.2);
+      border-top-color: #C084FC;
+      border-radius: 50%;
+      animation: spin 0.85s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Layar Splash Selama Pemuatan Server Google Apps Script -->
+  <div id="splash-loader" aria-live="polite">
+    <div class="loader-card">
+      <div class="logo-container">
+        <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" stroke="#2563EB" stroke-width="4" fill="#0B132B"/>
+          <path d="M50 16V9M50 9C52.2 9 54 7.2 54 5C54 2.8 52.2 1 50 1C47.8 1 46 2.8 46 5C46 7.2 47.8 9 50 9Z" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
+          <rect x="18" y="36" width="8" height="20" rx="4" fill="#2563EB"/>
+          <rect x="74" y="36" width="8" height="20" rx="4" fill="#2563EB"/>
+          <rect x="23" y="22" width="54" height="46" rx="20" fill="#FFFFFF"/>
+          <rect x="30" y="30" width="40" height="28" rx="12" fill="#0F172A"/>
+          <path d="M36 43C37.5 39 42.5 39 44 43" stroke="#06B6D4" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M56 43C57.5 39 62.5 39 64 43" stroke="#06B6D4" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M46 51C48 53.5 52 53.5 54 51" stroke="#06B6D4" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M33 70C33 66 40 64 50 64C60 64 67 66 67 70V76H33V70Z" fill="#F8FAFC"/>
+          <path d="M45 68H55L53 74H47L45 68Z" fill="#2563EB"/>
+          <path d="M47 70L50 68.5L53 70L50 71.5L47 70Z" fill="#FFFFFF"/>
+        </svg>
+      </div>
+      <h1 class="brand-title">GuruDigitalLab<span>.id</span></h1>
+      <p class="brand-subtitle">Menghubungkan ke Cloud Engine...</p>
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <!-- Iframe Google Apps Script dengan Izin Sandbox Lengkap -->
+  <iframe 
+    id="gas-frame"
+    title="GuruDigitalLab.id Web Application"
+    allow="clipboard-write; clipboard-read; fullscreen; accelerometer; autoplay"
+    loading="eager"
+  ></iframe>
+
+  <script>
+    (function() {
+      // URL Deployment Google Apps Script Aktif Anda
+      const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbywUj1-cCPzEeHE29VIaMgAznCVU1QsiKqIZhcq6wHUtUfeGWOsk9-VUnLtnXwRoLLg/exec";
+
+      const iframe = document.getElementById('gas-frame');
+      const splash = document.getElementById('splash-loader');
+
+      // 1. Tangkap Query Parameter (?page=admin, dll) & Hash (#admin, #katalog) dari URL Vercel
+      const currentSearch = window.location.search;
+      const currentHash = window.location.hash;
+
+      // 2. Bangun Target URL Google Apps Script yang sinkron
+      let targetUrl = GAS_WEBAPP_URL;
+
+      if (currentSearch) {
+        // Teruskan parameter (misal: ?page=admin)
+        targetUrl += (targetUrl.includes('?') ? '&' : '?') + currentSearch.substring(1);
+      }
+      if (currentHash) {
+        // Teruskan hash tag
+        targetUrl += currentHash;
+      }
+
+      // 3. Masukkan ke iframe
+      iframe.src = targetUrl;
+
+      // 4. Hilangkan Splash Loader saat iframe selesai memuat
+      iframe.onload = function() {
+        if (splash) {
+          splash.classList.add('loaded');
+        }
+      };
+
+      // Fallback Keamanan: Pastikan splash tertutup jika koneksi Google memerlukan waktu > 5.5 detik
+      setTimeout(function() {
+        if (splash && !splash.classList.contains('loaded')) {
+          splash.classList.add('loaded');
+        }
+      }, 5500);
+    })();
+  </script>
+</body>
+</html>
